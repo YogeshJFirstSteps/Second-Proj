@@ -1,0 +1,396 @@
+ use tka;
+Database changed
+mysql> create table employeee (id int, name varchar(10),salary int,department varchar(10),location varchar(10));
+Query OK, 0 rows affected (4.46 sec)
+
+
+mysql> use tka;
+Database changed
+mysql> insert into employeee(id,name,salary,department,location)values(1,"anup",10000,"dev","Pune");
+Query OK, 1 row affected (0.18 sec)
+
+mysql> insert into employeee values(2,"Rani",26000,"Test","Nashik");
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into employeee values(3,"Jay",180000,"Dev","Nagpur"),(4,"Vishal",22000,"Support","pune"),(5,"shina",35000,"test","nagpur"),(6,"Rony",11000,"support","nagpur"),(7,"pooja",38000,"dev","nashik");
+Query OK, 5 rows affected (0.41 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> select * from employeee;
++------+--------+--------+------------+----------+
+| id   | name   | salary | department | location |
++------+--------+--------+------------+----------+
+|    1 | anup   |  10000 | dev        | Pune     |
+|    2 | Rani   |  26000 | Test       | Nashik   |
+|    3 | Jay    | 180000 | Dev        | Nagpur   |
+|    4 | Vishal |  22000 | Support    | pune     |
+|    5 | shina  |  35000 | test       | nagpur   |
+|    6 | Rony   |  11000 | support    | nagpur   |
+|    7 | pooja  |  38000 | dev        | nashik   |
++------+--------+--------+------------+----------+
+7 rows in set (0.00 sec)
+
+mysql> select name from employeee;
++--------+
+| name   |
++--------+
+| anup   |
+| Rani   |
+| Jay    |
+| Vishal |
+| shina  |
+| Rony   |
+| pooja  |
++--------+
+7 rows in set (0.00 sec)
+
+mysql> select count(id) from employeee;
++-----------+
+| count(id) |
++-----------+
+|         7 |
++-----------+
+1 row in set (0.00 sec)
+
+
+mysql> select department from employeee
+    -> group by department;
++------------+
+| department |
++------------+
+| dev        |
+| Test       |
+| Support    |
++------------+
+3 rows in set (0.00 sec)
+
+
+mysql> select count(id),department from employeee
+    -> group by department;
++-----------+------------+
+| count(id) | department |
++-----------+------------+
+|         3 | dev        |
+|         2 | Test       |
+|         2 | Support    |
++-----------+------------+
+3 rows in set (0.00 sec)
+
+
+mysql> select max(salary) from employeee;
++-------------+
+| max(salary) |
++-------------+
+|      180000 |
++-------------+
+1 row in set (0.00 sec)
+
+
+mysql> update employeee
+    -> set salary=18000
+    -> where id=3;
+Query OK, 1 row affected (0.29 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from employeee order by salary desc limit 1;
++------+-------+--------+------------+----------+
+| id   | name  | salary | department | location |
++------+-------+--------+------------+----------+
+|    7 | pooja |  38000 | dev        | nashik   |
++------+-------+--------+------------+----------+
+1 row in set (0.00 sec)
+
+mysql> select * from employeee order by salary asc limit 1;
++------+------+--------+------------+----------+
+| id   | name | salary | department | location |
++------+------+--------+------------+----------+
+|    1 | anup |  10000 | dev        | Pune     |
++------+------+--------+------------+----------+
+1 row in set (0.00 sec)
+
+mysql> select * from employeee
+    -> where salary>20000;
++------+--------+--------+------------+----------+
+| id   | name   | salary | department | location |
++------+--------+--------+------------+----------+
+|    2 | Rani   |  26000 | Test       | Nashik   |
+|    4 | Vishal |  22000 | Support    | pune     |
+|    5 | shina  |  35000 | test       | nagpur   |
+|    7 | pooja  |  38000 | dev        | nashik   |
++------+--------+--------+------------+----------+
+4 rows in set (0.00 sec)
+
+mysql> select avg(salary) from employeee;
++-------------+
+| avg(salary) |
++-------------+
+|  22857.1429 |
++-------------+
+1 row in set (0.10 sec)
+
+mysql> select * from employeee order by salary asc limit 5;
++------+--------+--------+------------+----------+
+| id   | name   | salary | department | location |
++------+--------+--------+------------+----------+
+|    1 | anup   |  10000 | dev        | Pune     |
+|    6 | Rony   |  11000 | support    | nagpur   |
+|    3 | Jay    |  18000 | Dev        | Nagpur   |
+|    4 | Vishal |  22000 | Support    | pune     |
+|    2 | Rani   |  26000 | Test       | Nashik   |
++------+--------+--------+------------+----------+
+5 rows in set (0.00 sec)
+
+mysql> select * from employeee order by salary desc limit 5;
++------+--------+--------+------------+----------+
+| id   | name   | salary | department | location |
++------+--------+--------+------------+----------+
+|    7 | pooja  |  38000 | dev        | nashik   |
+|    5 | shina  |  35000 | test       | nagpur   |
+|    2 | Rani   |  26000 | Test       | Nashik   |
+|    4 | Vishal |  22000 | Support    | pune     |
+|    3 | Jay    |  18000 | Dev        | Nagpur   |
++------+--------+--------+------------+----------+
+5 rows in set (0.00 sec)
+
+
+mysql> insert into employeee values(7,"yash",12000,"marketing","solapur");
+Query OK, 1 row affected (0.41 sec)
+
+mysql> select * from employeee;
++------+--------+--------+------------+----------+
+| id   | name   | salary | department | location |
++------+--------+--------+------------+----------+
+|    1 | anup   |  10000 | dev        | Pune     |
+|    2 | Rani   |  26000 | Test       | Nashik   |
+|    3 | Jay    |  18000 | Dev        | Nagpur   |
+|    4 | Vishal |  22000 | Support    | pune     |
+|    5 | shina  |  35000 | test       | nagpur   |
+|    6 | Rony   |  11000 | support    | nagpur   |
+|    7 | pooja  |  38000 | dev        | nashik   |
+|    7 | yash   |  12000 | marketing  | solapur  |
++------+--------+--------+------------+----------+
+8 rows in set (0.00 sec)
+
+
+mysql> select * from employeee
+    -> where salary between 15000 and 25000;
++------+--------+--------+------------+----------+
+| id   | name   | salary | department | location |
++------+--------+--------+------------+----------+
+|    3 | Jay    |  18000 | Dev        | Nagpur   |
+|    4 | Vishal |  22000 | Support    | pune     |
++------+--------+--------+------------+----------+
+2 rows in set (0.00 sec)
+
+mysql> select * from employeee
+    -> where salary="null";
+Empty set, 1 warning (0.00 sec)
+
+mysql> select name from employeee
+    -> where name like 'j%';
++------+
+| name |
++------+
+| Jay  |
++------+
+1 row in set (0.00 sec)
+
+mysql> select name,salary from employeee
+    -> order by salary desc;
++--------+--------+
+| name   | salary |
++--------+--------+
+| pooja  |  38000 |
+| shina  |  35000 |
+| Rani   |  26000 |
+| Vishal |  22000 |
+| Jay    |  18000 |
+| yash   |  12000 |
+| Rony   |  11000 |
+| anup   |  10000 |
++--------+--------+
+8 rows in set (0.00 sec)
+
+mysql> select sum(salary) from employeee;
++-------------+
+| sum(salary) |
++-------------+
+|      172000 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select * from employeee
+    -> where name like 'r%';
++------+------+--------+------------+----------+
+| id   | name | salary | department | location |
++------+------+--------+------------+----------+
+|    2 | Rani |  26000 | Test       | Nashik   |
+|    6 | Rony |  11000 | support    | nagpur   |
++------+------+--------+------------+----------+
+2 rows in set (0.00 sec)
+
+
+mysql> select count(id) from employeee
+    -> where location ="pune";
++-----------+
+| count(id) |
++-----------+
+|         2 |
++-----------+
+1 row in set (0.00 sec)
+
+mysql> select avg(salary) from employeee
+    -> where department ="dev";
++-------------+
+| avg(salary) |
++-------------+
+|  22000.0000 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select name,salary from employeee
+    -> where salary>(select avg(salary) from employeee);
++--------+--------+
+| name   | salary |
++--------+--------+
+| Rani   |  26000 |
+| Vishal |  22000 |
+| shina  |  35000 |
+| pooja  |  38000 |
++--------+--------+
+4 rows in set (0.00 sec)
+
+
+mysql> select min(salary) from employeee
+    -> where department="test";
++-------------+
+| min(salary) |
++-------------+
+|       26000 |
++-------------+
+1 row in set (0.00 sec)
+
+
+Query OK, 0 rows affected (0.62 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from employeee;
++------+--------+--------+------------+----------+------------+
+| id   | name   | salary | department | location | hiredyears |
++------+--------+--------+------------+----------+------------+
+|    1 | anup   |  10000 | dev        | Pune     |       NULL |
+|    2 | Rani   |  26000 | Test       | Nashik   |       NULL |
+|    3 | Jay    |  18000 | Dev        | Nagpur   |       NULL |
+|    4 | Vishal |  22000 | Support    | pune     |       NULL |
+|    5 | shina  |  35000 | test       | nagpur   |       NULL |
+|    6 | Rony   |  11000 | support    | nagpur   |       NULL |
+|    7 | pooja  |  38000 | dev        | nashik   |       NULL |
+|    7 | yash   |  12000 | marketing  | solapur  |       NULL |
++------+--------+--------+------------+----------+------------+
+8 rows in set (0.00 sec)
+
+mysql> update employeee
+    -> set hiredyears=2023
+    -> where id=1;
+Query OK, 1 row affected (0.15 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employeee
+    -> set hiredyears=2000
+    -> where id =2;
+Query OK, 1 row affected (0.15 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employeee
+    -> set hiredyears=2023
+    -> where id =3;
+Query OK, 1 row affected (0.17 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employeee
+    -> set hiredyears=2023
+    -> where id = 4;
+Query OK, 1 row affected (0.15 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employeee
+    -> set hiredyears=2023
+    -> where id =5;
+Query OK, 1 row affected (0.08 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employeee
+    -> set hiredyears=2023
+    -> where id =6;
+Query OK, 1 row affected (0.05 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employeee
+    -> set hiredyears=2022
+    -> where id=7;
+Query OK, 2 rows affected (0.14 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+
+mysql> select * from employeee;
++------+--------+--------+------------+----------+------------+
+| id   | name   | salary | department | location | hiredyears |
++------+--------+--------+------------+----------+------------+
+|    1 | anup   |  10000 | dev        | Pune     |       2023 |
+|    2 | Rani   |  26000 | Test       | Nashik   |       2000 |
+|    3 | Jay    |  18000 | Dev        | Nagpur   |       2023 |
+|    4 | Vishal |  22000 | Support    | pune     |       2023 |
+|    5 | shina  |  35000 | test       | nagpur   |       2023 |
+|    6 | Rony   |  11000 | support    | nagpur   |       2023 |
+|    7 | pooja  |  38000 | dev        | nashik   |       2022 |
+|    7 | yash   |  12000 | marketing  | solapur  |       2022 |
++------+--------+--------+------------+----------+------------+
+8 rows in set (0.00 sec)
+
+mysql> select * from employeee
+    -> where hiredyears=2023;
++------+--------+--------+------------+----------+------------+
+| id   | name   | salary | department | location | hiredyears |
++------+--------+--------+------------+----------+------------+
+|    1 | anup   |  10000 | dev        | Pune     |       2023 |
+|    3 | Jay    |  18000 | Dev        | Nagpur   |       2023 |
+|    4 | Vishal |  22000 | Support    | pune     |       2023 |
+|    5 | shina  |  35000 | test       | nagpur   |       2023 |
+|    6 | Rony   |  11000 | support    | nagpur   |       2023 |
++------+--------+--------+------------+----------+------------+
+5 rows in set (0.00 sec)
+
+
+mysql> select department,sum(salary) from employeee
+    -> where department in('dev','support')
+    -> group by department;
++------------+-------------+
+| department | sum(salary) |
++------------+-------------+
+| dev        |       66000 |
+| Support    |       33000 |
++------------+-------------+
+2 rows in set (0.00 sec)
+
+mysql> select * from employeee
+    -> where salary>(select avg(salary) from employeee where department="dev");
++------+-------+--------+------------+----------+------------+
+| id   | name  | salary | department | location | hiredyears |
++------+-------+--------+------------+----------+------------+
+|    2 | Rani  |  26000 | Test       | Nashik   |       2000 |
+|    5 | shina |  35000 | test       | nagpur   |       2023 |
+|    7 | pooja |  38000 | dev        | nashik   |       2022 |
++------+-------+--------+------------+----------+------------+
+3 rows in set (0.00 sec)
+
+
+mysql> group by departnent;^C
+mysql> select sum(salary) from employeee
+    -> where location="pune";
++-------------+
+| sum(salary) |
++-------------+
+|       32000 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql>
